@@ -1,8 +1,8 @@
 branch-defaults:
   default:
-    environment: Rails1-env
+    environment: Rails1-env2
   master:
-    environment: Rails1-env
+    environment: Rails1-env2
 environment-defaults:
   Rails1-env:
     branch: master
