@@ -1,0 +1,5 @@
+branch-defaults:
+  default:
+    environment: Rails1-env
+global:
+  profile: null
