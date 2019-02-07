@@ -6,7 +6,7 @@ branch-defaults:
 environment-defaults:
   Rails1-env:
     branch: master
-    repository: Rails
+    #repository: Rails
 global:
   application_name: Rails1
   default_ec2_keyname: frankfurtkeypair
