@@ -1,18 +1,10 @@
 pipeline {
     agent any
-            //environment {
-            //    GIT_BRANCH_LOCAL = "staging"
-            //}
-
     stages {
         stage('Test') {
             steps {
             checkout scm
               sh '''
-#This command captures GIT_BRANCH without origin appended at the front
-echo $GIT_BRANCH | sed -e 's|origin/||g' | tee branch
-#This command captures the latest commit
-git rev-parse HEAD | tee commit
 env
 export PATH=$PATH:/usr/local/bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims
 eval "$(rbenv init -)"
@@ -32,18 +24,15 @@ git rev-parse HEAD | tee commit
 env
 '''
 
-//and now read the value of GIT_BRANCH_LOCAL back in, for later use.
+//and now read the GIT values in for later use.
 script {
            env.GIT_BRANCH_LOCAL = readFile('branch').trim()
+           env.GIT_COMMIT = readFile('commit').trim()
         }
 
             }
         }
         stage('Deploy-Master') {
-            environment {
-                GIT_COMMIT = readFile('commit').trim()
-                GIT_BRANCH_LOCAL = readFile('branch').trim()
-            }
         	when {
     			expression {
         		return env.GIT_BRANCH_LOCAL == 'master';
@@ -57,10 +46,6 @@ script {
             }
         }
        stage('Deploy-staging') {
-            environment {
-                GIT_COMMIT = readFile('commit').trim()
-                GIT_BRANCH_LOCAL = readFile('branch').trim()
-            }
                 when {
                         expression {
                         return env.GIT_BRANCH_LOCAL == 'staging';
