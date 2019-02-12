@@ -21,4 +21,4 @@ phases:
     commands:
       #- echo Running rspec tests...
       #- bundle exec rspec spec/
-      - bin/rails test
+      - chmod 777 bin/rails && bin/rails test
