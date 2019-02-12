@@ -8,6 +8,8 @@ phases:
       #- echo Installing Bundler...
       #- gem install bundler
       #- bundle install --with test
+      - apt update
+      - apt install -y nodejs
       - export DISABLE_SPRING=1
       - gem install bundler
       - bundle install --with test
@@ -21,4 +23,5 @@ phases:
     commands:
       #- echo Running rspec tests...
       #- bundle exec rspec spec/
-      - chmod 777 bin/rails && bin/rails test
+      - chmod 777 bin/rails
+      - bin/rails test
